@@ -3,17 +3,15 @@ export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Pastikan API Key aman
+// Tanda seru (!) biar TypeScript gak rewel soal API Key
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     
-    // --- DATA ---
+    // --- KONFIGURASI BOS ---
     const DOMAIN = 'https://eventkuy.web.id'; 
-    const EMAIL_ADMIN = 'eventkuyofficial@gmail.com';
-    // Gunakan nama pengirim yang keren
     const PENGIRIM = 'EventKuy Official <noreply@eventkuy.web.id>'; 
 
     const status = body.transaction_status;
@@ -25,23 +23,30 @@ export async function POST(request: Request) {
 
     console.log(`Webhook: Order ${orderId} | Status: ${status}`);
 
+    // Logika Pembayaran Sukses
     if ((status === 'capture' || status === 'settlement') && (fraud === 'accept' || !fraud)) {
         
+        // Kirim Email
         await resend.emails.send({
           from: PENGIRIM, 
           to: email,
-          // reply_to: EMAIL_ADMIN, // <--- KITA MATIKAN DULU BIAR GAK MERAH
           subject: '✅ Tiket EventKuy Kamu Sudah Terbit!',
           html: `
-            <div style="font-family: sans-serif; padding: 20px; border: 1px solid #ddd;">
-              <h2 style="color: #4F46E5;">EventKuy</h2>
-              <p>Halo <b>${name}</b>, Pembayaranmu BERHASIL! ✅</p>
-              <p><strong>Order ID:</strong> ${orderId}</p>
-              <p><strong>Total:</strong> Rp ${new Intl.NumberFormat('id-ID').format(total)}</p>
-              <br/>
-              <a href="${DOMAIN}" style="background: #4F46E5; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+            <div style="font-family: sans-serif; max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+              <h2 style="color: #4F46E5; text-align: center;">EventKuy</h2>
+              <p>Halo <b>${name}</b>,</p>
+              <p>Pembayaran tiketmu BERHASIL! ✅</p>
+              
+              <div style="background: #f4f4f5; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p style="margin: 5px 0;"><strong>Order ID:</strong> ${orderId}</p>
+                <p style="margin: 5px 0;"><strong>Total:</strong> Rp ${new Intl.NumberFormat('id-ID').format(total)}</p>
+              </div>
+
+              <div style="text-align: center; margin-top: 30px;">
+                <a href="${DOMAIN}" style="background: #4F46E5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
                   Lihat Tiket Saya 🎟️
-              </a>
+                </a>
+              </div>
             </div>
           `
         });
