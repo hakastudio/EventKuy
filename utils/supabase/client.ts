@@ -1,9 +1,12 @@
 import { createBrowserClient } from '@supabase/ssr'
 
+// Fungsi standar
 export const createClient = () => {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-  // Jika kunci kosong (saat build), jangan crash dulu
-  return createBrowserClient(url || '', key || '')
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  )
 }
+
+// INI YANG DICARI HALAMAN TIKET/LOGIN!
+export const supabase = createClient()

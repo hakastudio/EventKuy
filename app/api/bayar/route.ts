@@ -1,4 +1,3 @@
-// 1. Biar Vercel gak rewel pas build
 export const dynamic = 'force-dynamic';
 
 import { createClient } from '@/utils/supabase/server';
@@ -7,7 +6,7 @@ import { snap } from '@/utils/midtrans';
 
 export async function POST(request: Request) {
   try {
-    // 2. Database HANYA dipanggil di dalam sini!
+    // Client HANYA dibuat di dalam sini saat ada permintaan masuk
     const supabase = await createClient();
     
     const body = await request.json();
