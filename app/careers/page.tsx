@@ -4,39 +4,18 @@ import { Briefcase } from "lucide-react";
 
 export default function CareersPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="max-w-4xl mx-auto px-6 py-24">
-        <h1 className="text-4xl font-black text-gray-900 mb-6 flex items-center gap-4">
-          Karir di EventKuy <Briefcase size={36} className="text-indigo-600" />
-        </h1>
-        <p className="text-lg text-gray-600 mb-12">
-          Bergabunglah bersama tim pionir yang sedang mengubah wajah industri event di Indonesia. Kami mencari talenta-talenta kreatif dan inovatif.
-        </p>
-        
-        <div className="space-y-6">
-          <div className="p-6 border border-gray-100 rounded-2xl hover:border-indigo-200 transition-colors">
-            <h3 className="text-xl font-bold text-gray-900">Frontend Developer (React/Next.js)</h3>
-            <p className="text-gray-500 text-sm mb-4">Remote / Jakarta • Full-time</p>
-            <button className="text-indigo-600 font-bold hover:underline">Lihat Detail & Lanjut Melamar &rarr;</button>
-          </div>
-          
-          <div className="p-6 border border-gray-100 rounded-2xl hover:border-indigo-200 transition-colors">
-            <h3 className="text-xl font-bold text-gray-900">Backend Engineer (Node.js/Supabase)</h3>
-            <p className="text-gray-500 text-sm mb-4">Jakarta • Full-time</p>
-            <button className="text-indigo-600 font-bold hover:underline">Lihat Detail & Lanjut Melamar &rarr;</button>
-          </div>
-
-          <div className="p-6 border border-gray-100 rounded-2xl hover:border-indigo-200 transition-colors">
-            <h3 className="text-xl font-bold text-gray-900">UI/UX Designer</h3>
-            <p className="text-gray-500 text-sm mb-4">Remote • Contract</p>
-            <button className="text-indigo-600 font-bold hover:underline">Lihat Detail & Lanjut Melamar &rarr;</button>
-          </div>
+      <div className="max-w-4xl mx-auto px-6 py-24 text-center">
+        <div className="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+          <Briefcase size={40} />
         </div>
+        <h1 className="text-4xl font-black text-gray-900 mb-4">Gabung Bersama EventKuy</h1>
+        <p className="text-gray-600 text-lg mb-10">Kami selalu mencari talenta hebat untuk merevolusi industri event di Indonesia.</p>
         
-        <div className="mt-16 p-8 bg-gray-50 rounded-3xl text-center">
-            <h4 className="font-bold text-gray-900 mb-2">Belum menemukan posisi yang pas?</h4>
-            <p className="text-sm text-gray-500 mb-4">Kirimkan CV dan Portfolio terbaikmu ke <span className="text-indigo-600 font-bold">hrd@eventkuy.web.id</span></p>
+        <div className="bg-white p-10 rounded-3xl shadow-sm border border-gray-200">
+          <h3 className="text-xl font-bold text-gray-900 mb-2">Belum Ada Lowongan Terbuka</h3>
+          <p className="text-gray-500">Saat ini tim kami sudah lengkap, tapi jangan ragu untuk mengirimkan CV Anda ke <span className="text-indigo-600 font-bold">hrd@eventkuy.web.id</span> untuk kesempatan di masa depan!</p>
         </div>
       </div>
       <Footer />
