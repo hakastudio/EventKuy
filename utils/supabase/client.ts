@@ -1,6 +1,5 @@
 import { createBrowserClient } from '@supabase/ssr'
 
-// Fungsi standar
 export const createClient = () => {
   return createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || '',
@@ -8,5 +7,5 @@ export const createClient = () => {
   )
 }
 
-// INI YANG DICARI HALAMAN TIKET/LOGIN!
+// INI WAJIB ADA: Biar halaman lain gak error "Export supabase doesn't exist"
 export const supabase = createClient()
