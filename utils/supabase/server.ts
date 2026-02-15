@@ -4,9 +4,9 @@ import { cookies } from 'next/headers'
 export const createClient = async () => {
   const cookieStore = await cookies()
   
-  // Gunakan fallback string kosong agar tidak error "required" saat build
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  // Ambil kunci, kalau kosong kasih string kosong biar gak error pas build
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
   return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
@@ -16,7 +16,7 @@ export const createClient = async () => {
           cookiesToSet.forEach(({ name, value, options }) =>
             cookieStore.set(name, value, options)
           )
-        } catch { /* Aman di Server Component */ }
+        } catch { /* Aman di Server */ }
       },
     },
   })
