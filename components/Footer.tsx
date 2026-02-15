@@ -32,18 +32,20 @@ export default function Footer() {
         <div>
            <h3 className="text-white font-bold mb-4">Perusahaan</h3>
            <ul className="space-y-3 text-sm text-gray-400">
-              {['Tentang Kami', 'Karir', 'Blog', 'Partner'].map((item) => (
-                 <li key={item}><Link href="#" className="hover:text-brand-blue transition-colors">{item}</Link></li>
-              ))}
+              <li><Link href="/about" className="hover:text-indigo-600 transition-colors">Tentang Kami</Link></li>
+              <li><Link href="/careers" className="hover:text-indigo-600 transition-colors">Karir</Link></li>
+              <li><Link href="/blog" className="hover:text-indigo-600 transition-colors">Blog</Link></li>
+              <li><Link href="#" className="hover:text-indigo-600 transition-colors">Partner</Link></li>
            </ul>
         </div>
 
         <div>
            <h3 className="text-white font-bold mb-4">Dukungan</h3>
            <ul className="space-y-3 text-sm text-gray-400">
-              {['Pusat Bantuan', 'Syarat & Ketentuan', 'Kebijakan Privasi', 'Hubungi Kami'].map((item) => (
-                 <li key={item}><Link href="#" className="hover:text-brand-blue transition-colors">{item}</Link></li>
-              ))}
+              <li><Link href="#" className="hover:text-indigo-600 transition-colors">Pusat Bantuan</Link></li>
+              <li><Link href="/terms" className="hover:text-indigo-600 transition-colors">Syarat & Ketentuan</Link></li>
+              <li><Link href="/privacy" className="hover:text-indigo-600 transition-colors">Kebijakan Privasi</Link></li>
+              <li><Link href="/contact" className="hover:text-indigo-600 transition-colors">Hubungi Kami</Link></li>
            </ul>
         </div>
       </div>
