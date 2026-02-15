@@ -2,7 +2,7 @@
 import midtransClient from 'midtrans-client';
 
 export const snap = new midtransClient.Snap({
-  isProduction: false, // Karena Bos pakai mode Sandbox
-  serverKey: 'Mid-server-iCbxyhPXQ4u5F5xDcix8DNwV', // Langsung pasang atau pakai process.env
-  clientKey: 'Mid-client-89GR9ZARi7Y6kly0'
+  isProduction: false,
+  serverKey: process.env.MIDTRANS_SERVER_KEY,
+  clientKey: process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY
 });
