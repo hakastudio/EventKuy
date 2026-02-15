@@ -1,3 +1,4 @@
+// WAJIB ADA: Biar Vercel gak coba-coba render file ini pas build
 export const dynamic = 'force-dynamic';
 
 import { createClient } from '@/utils/supabase/server';
@@ -7,7 +8,8 @@ import { snap } from '@/utils/midtrans';
 export async function POST(request: Request) {
   try {
     const supabase = await createClient();
-    const { eventId, quantity, price, userEmail, userName } = await request.json();
+    const body = await request.json();
+    const { eventId, quantity, price, userEmail, userName } = body;
 
     const orderId = `EVT-${Date.now()}`;
 
