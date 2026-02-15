@@ -1,4 +1,3 @@
-// WAJIB ADA: Biar Vercel gak rewel pas build
 export const dynamic = 'force-dynamic';
 
 import { createClient } from '@/utils/supabase/server';
