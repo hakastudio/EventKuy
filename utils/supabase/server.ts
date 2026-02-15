@@ -3,10 +3,12 @@ import { cookies } from 'next/headers'
 
 export const createClient = async () => {
   const cookieStore = await cookies()
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  
+  // Gunakan fallback string kosong agar tidak error "required" saat build
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
-  return createServerClient(url || '', key || '', {
+  return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() { return cookieStore.getAll() },
       setAll(cookiesToSet) {
