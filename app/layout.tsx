@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Script from "next/script"; // 1. IMPORT INI
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "EventKuy - Tiket Event & Konser Pilihan", // <--- Nama Baru
-  description: "Platform tiket event termurah dan terpercaya.",
+  title: "EventKuy",
+  description: "Beli tiket event anti ribet",
 };
 
 export default function RootLayout({
@@ -15,9 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
-      <body className={`${inter.className} bg-bg-main text-text-main antialiased`}>
+    <html lang="en">
+      <body className={inter.className}>
         {children}
+
+        {/* 2. TAMBAHKAN SCRIPT INI DI BAWAH SINI */}
+        <Script
+          src="https://app.sandbox.midtrans.com/snap/snap.js"
+          data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
