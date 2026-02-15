@@ -9,23 +9,32 @@ const snap = new Midtrans.Snap({
 
 export async function POST(request: Request) {
   try {
-    const { eventId, price, userEmail, userName, eventName } = await request.json();
+    const body = await request.json();
+    
+    // Pastikan data tidak ada yang kosong
+    const eventId = body.eventId || 'EVT-001';
+    const eventName = body.eventName || 'Tiket EventKuy';
+    const price = Number(body.price) || 0;
+    const userEmail = body.userEmail || 'customer@mail.com';
+    const userName = body.userName || 'Customer';
 
     const parameter = {
       transaction_details: {
         order_id: `EK-${Date.now()}`,
-        gross_amount: price,
+        gross_amount: price, // Total harus sama dengan jumlah di item_details
       },
       customer_details: {
         first_name: userName,
         email: userEmail,
       },
-      item_details: [{
-        id: eventId,
-        price: price,
-        quantity: 1,
-        name: eventName,
-      }],
+      item_details: [
+        {
+          id: eventId,
+          price: price,
+          quantity: 1,
+          name: eventName.substring(0, 50), // Midtrans maksimal 50 karakter
+        },
+      ],
     };
 
     const transaction = await snap.createTransaction(parameter);
@@ -33,6 +42,9 @@ export async function POST(request: Request) {
 
   } catch (error: any) {
     console.error('Midtrans API Error:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ 
+      error: error.message,
+      details: error.ApiResponse || 'No details'
+    }, { status: 500 });
   }
 }
