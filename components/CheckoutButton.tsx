@@ -8,6 +8,7 @@ export default function CheckoutButton({ eventId, eventName, price, userEmail, u
   const handleBayar = async () => {
     setLoading(true);
     try {
+      // 1. Minta Token ke Backend
       const response = await fetch('/api/bayar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -21,20 +22,23 @@ export default function CheckoutButton({ eventId, eventName, price, userEmail, u
       });
 
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
+      if (!response.ok) throw new Error(data.error || 'Gagal membuat transaksi');
 
+      // 2. Munculkan Popup Midtrans
       const snap = (window as any).snap;
       if (snap) {
         snap.pay(data.token, {
-          onSuccess: (result: any) => alert('Pembayaran Berhasil! Cek Email ya! ✅'),
-          onPending: (result: any) => alert('Menunggu Pembayaran... ⏳'),
-          onError: (result: any) => alert('Pembayaran Gagal ❌'),
-          onClose: () => alert('Yah, kok ditutup Bos? 😅')
+          onSuccess: (result: any) => { alert('Pembayaran Berhasil! Cek Email ya!'); window.location.reload(); },
+          onPending: (result: any) => { alert('Menunggu pembayaran...'); },
+          onError: (result: any) => { alert('Pembayaran Gagal!'); },
+          onClose: () => { console.log('Customer menutup popup tanpa bayar'); }
         });
+      } else {
+        alert('Midtrans Belum Siap, coba refresh halaman Bos!');
       }
-    } catch (error) {
-      console.error(error);
-      alert('Gagal memproses transaksi');
+    } catch (error: any) {
+      console.error('Error:', error);
+      alert(error.message || 'Terjadi kesalahan sistem');
     } finally {
       setLoading(false);
     }
@@ -44,9 +48,9 @@ export default function CheckoutButton({ eventId, eventName, price, userEmail, u
     <button 
       onClick={handleBayar}
       disabled={loading}
-      className="w-full py-4 bg-indigo-600 text-white font-bold text-center rounded-xl hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200 disabled:bg-gray-400"
+      className="w-full py-4 bg-indigo-600 text-white font-bold text-center rounded-xl hover:bg-indigo-700 transition-all disabled:bg-gray-400"
     >
-      {loading ? 'Memproses...' : 'Beli Tiket Sekarang'}
+      {loading ? 'Menghubungkan Midtrans...' : 'Beli Tiket Sekarang'}
     </button>
   );
 }
