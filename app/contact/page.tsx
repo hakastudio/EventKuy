@@ -18,7 +18,7 @@ export default function ContactPage() {
             </div>
             <h4 className="font-bold mb-2">WhatsApp</h4>
             <p className="text-sm text-gray-500 mb-4">Chat cepat via WhatsApp</p>
-            <a href="https://wa.me/628123456789" className="text-indigo-600 font-bold">0812-3456-789</a>
+            <a href="https://wa.me/6285175114542" className="text-indigo-600 font-bold">0851-7511-4542</a>
           </div>
           <div className="bg-white p-8 rounded-3xl shadow-sm text-center border-2 border-indigo-600">
             <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -34,7 +34,7 @@ export default function ContactPage() {
             </div>
             <h4 className="font-bold mb-2">Telepon</h4>
             <p className="text-sm text-gray-500 mb-4">Senin - Jumat (09.00 - 17.00)</p>
-            <p className="text-indigo-600 font-bold">021-1234567</p>
+            <p className="text-indigo-600 font-bold">0851-7511-4542</p>
           </div>
         </div>
       </div>

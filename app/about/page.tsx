@@ -1,3 +1,9 @@
+// TAMBAHKAN BARIS INI DI PALING ATAS SETIAP FILE BARU TADI
+export const dynamic = 'force-dynamic'; 
+
+import Navbar from "@/components/Navbar";
+// ... sisa kode lainnya
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
